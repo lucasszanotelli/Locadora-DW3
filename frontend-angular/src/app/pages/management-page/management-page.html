@@ -1,3 +1,52 @@
-<section class="page-heading"><div><a class="crumb" href="/">Início</a><span> / {{ page().title }}</span><h1>{{ page().title }}</h1><p>{{ page().description }}</p></div><button class="primary" (click)="showForm.set(!showForm())">{{ showForm() ? 'Cancelar' : '+ ' + page().action }}</button></section>
-<section class="editor" *ngIf="showForm()"><div class="editor-title"><div><h2>{{ page().action }}</h2><p>Preencha os dados abaixo. Esta é uma interface demonstrativa, sem integração com backend.</p></div><button class="close" (click)="showForm.set(false)" aria-label="Fechar">×</button></div><div class="fields"><label>Nome ou descrição<input [placeholder]="'Informe ' + page().singular" /></label><label>Informação complementar<input placeholder="Preencha uma informação" /></label><label>Classificação<select><option>Selecione uma opção</option><option>Ativo</option><option>Disponível</option></select></label></div><div class="form-actions"><button class="secondary" (click)="showForm.set(false)">Cancelar</button><button class="primary" (click)="showForm.set(false)">Salvar rascunho</button></div></section>
-<section class="list-card"><div class="toolbar"><div class="search"><span>?</span><input [value]="query()" (input)="search($event)" [placeholder]="'Buscar ' + page().title.toLowerCase()" /></div><span class="count">{{ filteredRows().length }} registros</span></div><div class="table-wrap"><table><thead><tr><th *ngFor="let column of page().columns">{{ column }}</th><th aria-label="Ações"></th></tr></thead><tbody><tr *ngFor="let row of filteredRows()"><td *ngFor="let value of row"><span [class.status]="value === 'Disponível' || value === 'Ativo' || value === 'Em aberto' || value === 'Pendente' || value === 'Atrasada' || value === 'Finalizada'" [class.warning]="value === 'Atrasada'">{{ value }}</span></td><td class="actions"><button title="Editar">?</button><button title="Mais opções">•••</button></td></tr><tr *ngIf="filteredRows().length === 0"><td [attr.colspan]="page().columns.length + 1" class="empty">Nenhum registro encontrado.</td></tr></tbody></table></div></section>
+<section class="page-heading">
+    <div><a class="crumb" href="/">InÃ­cio</a><span> / {{ page().title }}</span>
+        <h1>{{ page().title }}</h1>
+        <p>{{ page().description }}</p>
+    </div><button class="primary" (click)="showForm.set(!showForm())">{{ showForm() ? 'Cancelar' : '+ ' + page().action
+        }}</button>
+</section>
+<section class="editor" *ngIf="showForm()">
+    <div class="editor-title">
+        <div>
+            <h2>{{ page().action }}</h2>
+            <p>Preencha os dados abaixo. Esta Ã© uma interface demonstrativa, sem integraÃ§Ã£o com backend.</p>
+        </div><button class="close" (click)="showForm.set(false)" aria-label="Fechar">Voltar</button>
+    </div>
+    <div class="fields"><label>Nome ou descriÃ§Ã£o<input
+                [placeholder]="'Informe ' + page().singular" /></label><label>InformaÃ§Ã£o complementar<input
+                placeholder="Preencha uma informaÃ§Ã£o" /></label><label>ClassificaÃ§Ã£o<select>
+                <option>Selecione uma opÃ§Ã£o</option>
+                <option>Ativo</option>
+                <option>DisponÃ­vel</option>
+            </select></label></div>
+    <div class="form-actions"><button class="secondary" (click)="showForm.set(false)">Cancelar</button><button
+            class="primary" (click)="showForm.set(false)">Salvar rascunho</button></div>
+</section>
+<section class="list-card">
+    <div class="toolbar">
+        <div class="search"><span>?</span><input [value]="query()" (input)="search($event)"
+                [placeholder]="'Buscar ' + page().title.toLowerCase()" /></div><span class="count">{{
+            filteredRows().length }} registros</span>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th *ngFor="let column of page().columns">{{ column }}</th>
+                    <th aria-label="AÃ§Ãµes"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of filteredRows()">
+                    <td *ngFor="let value of row"><span
+                            [class.status]="value === 'DisponÃ­vel' || value === 'Ativo' || value === 'Em aberto' || value === 'Pendente' || value === 'Atrasada' || value === 'Finalizada'"
+                            [class.warning]="value === 'Atrasada'">{{ value }}</span></td>
+                    <td class="actions"><button title="Editar">excluir</button><button title="Mais opÃ§Ãµes">editar</button></td>
+                </tr>
+                <tr *ngIf="filteredRows().length === 0">
+                    <td [attr.colspan]="page().columns.length + 1" class="empty">Nenhum registro encontrado.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
